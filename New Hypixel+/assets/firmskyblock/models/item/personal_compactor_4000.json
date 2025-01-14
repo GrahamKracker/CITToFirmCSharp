@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_block",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/accessories/personal_compactor/personal_compactor_4000"
+  }
+}

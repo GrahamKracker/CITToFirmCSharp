@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_skull_item",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/crimson_isle/enchanted_red_sand_cube"
+  }
+}

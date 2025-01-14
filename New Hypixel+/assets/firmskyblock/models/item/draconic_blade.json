@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/end/draconic_blade"
+  }
+}

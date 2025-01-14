@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "block/stone",
+        "layer1": "./spread_disabled"
+    }
+}

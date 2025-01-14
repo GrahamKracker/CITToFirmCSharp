@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/tank_miner/tank_miner_chestplate_dyed"
+  }
+}

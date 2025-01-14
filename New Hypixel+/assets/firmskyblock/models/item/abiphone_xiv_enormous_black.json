@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld_abiphone",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/tools/abiphones/abiphone_xiv_enormous_black"
+  }
+}

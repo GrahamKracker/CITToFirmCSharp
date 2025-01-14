@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "./sludge_juice",
+        "layer1": "item/potion"
+    }
+}

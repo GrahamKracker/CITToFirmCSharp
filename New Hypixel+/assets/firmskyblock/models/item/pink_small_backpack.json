@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/backpacks/small_backpack/pink_small_backpack"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/modifiers/ruby_power_scroll"
+  }
+}

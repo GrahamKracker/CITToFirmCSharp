@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld_gun",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/tools/combat/snow_howitzer"
+  }
+}

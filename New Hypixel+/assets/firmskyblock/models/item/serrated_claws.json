@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/pet_items/serrated_claws"
+  }
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "item/hplus_handheld_staff",
+	"textures": {
+		"hand": "./runic_staff_hand",
+		"icon": "./runic_staff"
+	}
+}

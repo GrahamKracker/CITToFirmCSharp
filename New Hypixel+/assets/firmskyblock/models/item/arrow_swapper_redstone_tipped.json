@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/tools/arrows/arrow_swapper_redstone_tipped"
+  }
+}

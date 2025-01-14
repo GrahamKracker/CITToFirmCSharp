@@ -1,0 +1,11 @@
+{
+	"parent": "./null_block",
+	"textures": {
+		"north": "block/oak_log",
+		"east": "block/oak_log",
+		"south": "block/oak_log",
+		"west": "block/oak_log",
+		"up": "block/oak_log_top",
+		"down": "block/oak_log_top"
+	}
+}

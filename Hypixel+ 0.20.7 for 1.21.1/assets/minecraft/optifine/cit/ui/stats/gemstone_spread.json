@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "optifine/cit/skyblock/items/dwarven_mines/gemstones/flawless_topaz_gem",
+        "layer1": "./spread"
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_tint_bypass",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/rift/rift_trophy_wyldly_supreme"
+  }
+}

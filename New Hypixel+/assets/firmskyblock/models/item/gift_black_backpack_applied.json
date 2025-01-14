@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/backpacks/skins/gift_black_backpack_applied"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "item/hplus_block_all_same",
+    "textures": {
+        "0": "./bedwars_wool"
+    }
+}

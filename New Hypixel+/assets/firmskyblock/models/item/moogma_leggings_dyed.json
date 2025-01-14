@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/lava_sea_creature/moogma_leggings_dyed"
+  }
+}

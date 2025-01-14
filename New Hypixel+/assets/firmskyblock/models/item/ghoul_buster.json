@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld_scythe",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/swords/ghoul_buster"
+  }
+}

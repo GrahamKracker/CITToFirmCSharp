@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/accessories/master_skull/master_skull_tier_6"
+  }
+}

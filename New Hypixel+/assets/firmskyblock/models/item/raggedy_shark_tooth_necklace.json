@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/accessories/shark_tooth_necklace/raggedy_shark_tooth_necklace"
+  }
+}

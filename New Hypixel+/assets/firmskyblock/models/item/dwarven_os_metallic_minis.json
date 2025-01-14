@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/dwarven_mines/dwarven_os_metallic_minis"
+  }
+}

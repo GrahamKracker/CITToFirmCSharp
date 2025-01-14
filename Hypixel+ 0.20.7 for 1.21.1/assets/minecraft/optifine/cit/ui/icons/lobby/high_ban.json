@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "optifine/cit/skyblock/items/reforge_stones/anvil_hammer",
+        "layer1": "./high_ban"
+    }
+}

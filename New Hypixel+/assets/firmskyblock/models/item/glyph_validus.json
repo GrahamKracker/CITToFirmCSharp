@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_tint_bypass",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/rift/glyph_validus"
+  }
+}

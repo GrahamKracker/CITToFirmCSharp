@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/fervor/fiery/fiery_fervor_boots_dyed"
+  }
+}

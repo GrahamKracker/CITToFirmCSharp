@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/frozen_blaze/frozen_blaze_chestplate_dyed"
+  }
+}

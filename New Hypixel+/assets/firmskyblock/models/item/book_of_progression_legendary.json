@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/accessories/book_of_progression/book_of_progression_legendary"
+  }
+}

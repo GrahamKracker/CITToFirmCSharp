@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_giant_handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/swords/giant_cleaver"
+  }
+}

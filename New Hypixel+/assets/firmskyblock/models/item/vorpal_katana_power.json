@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld_longsword",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/longswords/vorpal_katana_power"
+  }
+}

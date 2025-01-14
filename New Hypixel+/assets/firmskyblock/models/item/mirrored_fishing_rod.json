@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/rift/mirrored_fishing_rod"
+  }
+}

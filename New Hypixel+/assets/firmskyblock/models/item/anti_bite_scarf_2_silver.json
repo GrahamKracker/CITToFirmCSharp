@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_scarf",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/rift/anti_bite_scarf/anti_bite_scarf_2_silver"
+  }
+}

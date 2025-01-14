@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "./null_chestplate_dyed",
+        "layer1": "./null_armor_overlay"
+    }
+}

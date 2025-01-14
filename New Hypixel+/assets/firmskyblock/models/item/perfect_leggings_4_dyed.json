@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/perfect/perfect_4/perfect_leggings_4_dyed"
+  }
+}

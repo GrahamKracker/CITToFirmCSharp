@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/wands/hollow_wand"
+  }
+}

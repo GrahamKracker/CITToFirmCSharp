@@ -1,0 +1,6 @@
+{
+	"parent": "item/hplus_skull_item",
+	"textures": {
+		"0": "./concentrated_stone"
+	}
+}

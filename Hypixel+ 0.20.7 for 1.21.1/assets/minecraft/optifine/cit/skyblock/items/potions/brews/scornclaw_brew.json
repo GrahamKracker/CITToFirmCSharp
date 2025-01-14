@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "./brew_mug",
+        "layer1": "./scornclaw_brew"
+    }
+}

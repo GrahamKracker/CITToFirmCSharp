@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/unstable_dragon/unstable_dragon_chestplate_dyed"
+  }
+}

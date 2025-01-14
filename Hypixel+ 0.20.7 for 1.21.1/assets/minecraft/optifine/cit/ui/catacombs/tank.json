@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "./tank",
+        "layer1": "./tank"
+    }
+}

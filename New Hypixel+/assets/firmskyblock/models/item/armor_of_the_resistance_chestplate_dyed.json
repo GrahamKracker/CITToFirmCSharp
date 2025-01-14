@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/armor_of_the_resistance/armor_of_the_resistance_chestplate_dyed"
+  }
+}

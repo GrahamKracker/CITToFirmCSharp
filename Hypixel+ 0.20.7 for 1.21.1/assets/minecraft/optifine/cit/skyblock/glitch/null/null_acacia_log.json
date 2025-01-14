@@ -1,0 +1,11 @@
+{
+	"parent": "./null_block",
+	"textures": {
+		"north": "block/acacia_log",
+		"east": "block/acacia_log",
+		"south": "block/acacia_log",
+		"west": "block/acacia_log",
+		"up": "block/acacia_log_top",
+		"down": "block/acacia_log_top"
+	}
+}

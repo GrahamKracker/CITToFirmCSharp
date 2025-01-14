@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "optifine/cit/ui/skills/carpentry_skill",
+        "layer1": "./wisdom_disabled"
+    }
+}

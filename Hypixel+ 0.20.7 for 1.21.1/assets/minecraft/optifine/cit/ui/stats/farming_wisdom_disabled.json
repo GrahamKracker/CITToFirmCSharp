@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "item/stone_hoe",
+        "layer1": "./wisdom_disabled"
+    }
+}

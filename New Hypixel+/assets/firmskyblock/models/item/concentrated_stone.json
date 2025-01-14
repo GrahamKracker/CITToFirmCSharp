@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_skull_item",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/dwarven_mines/crystal_hollows/concentrated_stone"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/swords/axe_of_the_shredded"
+  }
+}

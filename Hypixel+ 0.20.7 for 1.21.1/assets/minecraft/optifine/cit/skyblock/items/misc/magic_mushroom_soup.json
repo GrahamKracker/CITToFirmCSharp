@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "item/mushroom_stew",
+        "layer1": "./magic_mushroom_soup"
+    }
+}

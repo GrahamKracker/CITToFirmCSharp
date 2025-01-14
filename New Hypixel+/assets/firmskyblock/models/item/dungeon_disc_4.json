@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/template_music_disc",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/misc/discs/dungeon_disc_4"
+  }
+}

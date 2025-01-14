@@ -1,0 +1,11 @@
+{
+	"parent": "./null_block",
+	"textures": {
+		"north": "block/stone",
+		"east": "block/stone",
+		"south": "block/stone",
+		"west": "block/stone",
+		"up": "block/stone",
+		"down": "block/stone"
+	}
+}

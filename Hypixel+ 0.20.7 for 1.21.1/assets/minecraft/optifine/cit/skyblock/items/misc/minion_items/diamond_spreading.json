@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "item/diamond",
+        "layer1": "./diamond_spreading"
+    }
+}

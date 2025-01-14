@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "item/sugar_cane",
+        "layer1": "./platinum_pip"
+    }
+}

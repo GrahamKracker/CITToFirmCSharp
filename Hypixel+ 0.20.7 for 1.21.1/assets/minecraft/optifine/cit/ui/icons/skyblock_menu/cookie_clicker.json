@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "item/cookie",
+        "layer1": "./cookie_clicker"
+    }
+}

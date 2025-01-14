@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld_fencing",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/swords/scorpion_foil"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/tools/drills/drill_parts/goblin_omelette_blue_cheese"
+  }
+}

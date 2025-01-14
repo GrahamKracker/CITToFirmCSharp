@@ -1,0 +1,7 @@
+{
+	"parent": "item/hplus_handheld_staff",
+	"textures": {
+		"hand": "./tribal_spear_hand",
+		"icon": "./tribal_spear"
+	}
+}

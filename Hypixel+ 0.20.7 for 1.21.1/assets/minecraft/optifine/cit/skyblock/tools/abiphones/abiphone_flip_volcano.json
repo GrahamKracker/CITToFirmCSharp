@@ -1,0 +1,6 @@
+{
+	"parent": "item/hplus_handheld_abiphone_flip",
+	"textures": {
+		"0": "./abiphone_flip_volcano"
+	}
+}

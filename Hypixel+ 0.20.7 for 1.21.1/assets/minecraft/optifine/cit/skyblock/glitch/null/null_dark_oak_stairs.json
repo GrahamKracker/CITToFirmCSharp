@@ -1,0 +1,11 @@
+{
+	"parent": "./null_stairs",
+	"textures": {
+		"north": "block/dark_oak_planks",
+		"east": "block/dark_oak_planks",
+		"south": "block/dark_oak_planks",
+		"west": "block/dark_oak_planks",
+		"up": "block/dark_oak_planks",
+		"down": "block/dark_oak_planks"
+	}
+}

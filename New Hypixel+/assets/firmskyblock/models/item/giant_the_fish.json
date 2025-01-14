@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_giant_generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/special/the_fish/giant_the_fish"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "optifine/cit/ui/achoo.png",
+        "layer1": "./refined_bottle_of_jyrre"
+    }
+}

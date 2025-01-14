@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "./null_leggings",
+        "layer1": "./null_leggings"
+    }
+}

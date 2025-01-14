@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_block_all_same",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/misc/dctr_space_helm"
+  }
+}

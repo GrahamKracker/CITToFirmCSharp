@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/tools/drills/titanium_drill_3_full"
+  }
+}

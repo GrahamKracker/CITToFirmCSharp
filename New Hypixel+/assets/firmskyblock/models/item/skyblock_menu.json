@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_hidden_handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/misc/skyblock_menu"
+  }
+}

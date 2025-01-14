@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld_abiphone_flip",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/tools/abiphones/abiphone_flip_volcano"
+  }
+}

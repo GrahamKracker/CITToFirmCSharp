@@ -1,0 +1,11 @@
+{
+	"parent": "./null_stairs",
+	"textures": {
+		"north": "block/cobblestone",
+		"east": "block/cobblestone",
+		"south": "block/cobblestone",
+		"west": "block/cobblestone",
+		"up": "block/cobblestone",
+		"down": "block/cobblestone"
+	}
+}

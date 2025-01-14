@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/swords/firedust_dagger_ashen"
+  }
+}

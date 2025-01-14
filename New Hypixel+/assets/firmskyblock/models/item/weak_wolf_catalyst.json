@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/slayer/sven_packmaster/weak_wolf_catalyst"
+  }
+}

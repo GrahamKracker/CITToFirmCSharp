@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/fervor/hot/hot_fervor_chestplate_dyed"
+  }
+}

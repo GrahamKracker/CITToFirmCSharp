@@ -1,0 +1,11 @@
+{
+	"parent": "./null_stairs",
+	"textures": {
+		"north": "block/birch_planks",
+		"east": "block/birch_planks",
+		"south": "block/birch_planks",
+		"west": "block/birch_planks",
+		"up": "block/birch_planks",
+		"down": "block/birch_planks"
+	}
+}

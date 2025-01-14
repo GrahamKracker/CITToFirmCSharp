@@ -1,0 +1,7 @@
+{
+    "parent": "item/hplus_generated",
+    "textures": {
+        "layer0": "optifine/cit/skyblock/items/dwarven_mines/mithril_ore",
+        "layer1": "./fortune"
+    }
+}

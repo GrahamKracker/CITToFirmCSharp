@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_handheld_mirrored",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/swords/aspect_of_the_jerry_signature"
+  }
+}

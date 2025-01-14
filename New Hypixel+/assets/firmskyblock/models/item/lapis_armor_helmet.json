@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_helmet",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/armor/lapis_armor/lapis_armor_helmet"
+  }
+}

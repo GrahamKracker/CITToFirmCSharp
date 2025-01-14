@@ -1,0 +1,6 @@
+{
+  "parent": "firmskyblock:item/hplus_hidden_handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/weapons/bows/starred_bone_boomerang_thrown"
+  }
+}

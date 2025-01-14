@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "firmskyblock:item/skyblock/items/dwarven_mines/crystal_hollows/dwarven_gold_hammer"
+  }
+}

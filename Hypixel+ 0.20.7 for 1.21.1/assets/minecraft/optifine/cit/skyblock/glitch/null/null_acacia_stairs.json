@@ -1,0 +1,11 @@
+{
+	"parent": "./null_stairs",
+	"textures": {
+		"north": "block/acacia_planks",
+		"east": "block/acacia_planks",
+		"south": "block/acacia_planks",
+		"west": "block/acacia_planks",
+		"up": "block/acacia_planks",
+		"down": "block/acacia_planks"
+	}
+}
