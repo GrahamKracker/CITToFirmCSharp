@@ -30,4 +30,9 @@
       <None Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Program.cs" />
+      <Content Include="Program.cs" />
+    </ItemGroup>
+
 </Project>
