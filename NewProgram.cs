@@ -5,21 +5,42 @@ namespace CITToFirmCSharp;
 
 public class NewProgram
 {
-    private static readonly HashSet<string> _itemIds = new();
+    private readonly HashSet<string> _itemIds = [
+        "ARCHER_DUNGEON_ABILITY_2",
+        "ARCHER_DUNGEON_ABILITY_2",
+        "ARCHER_DUNGEON_ABILITY_3",
 
-    private async static Task Main(string[] args)
+        // Special Items
+        "BURNING_COINS",
+        "EXPENSIVE_TOY",
+
+        // Idk?
+        "SMALL_RUNES_SACK",
+        "MEDIUM_RUNES_SACK",
+        "LARGE_RUNES_SACK",
+        "RIFT_TROPHY_MOUNTAIN",
+        "DEAD_CAT_FOOD",
+        "PRE_DIGESTION_FISH",
+        "CHOCOLATE_CHIP",
+        "PERFECT_HOPPER",
+    ];
+
+    private static async Task Main()
     {
-        var client = new HttpClient();
-        var response = JsonSerializer.Deserialize<JsonObject[]>(await client.GetStringAsync("https://api.hypixel.net/v2/resources/skyblock/items"));
-        foreach (var item in response)
-        {
-            _itemIds.Add(item["id"].ToString());
-        }
         await new NewProgram().Run();
     }
 
-    public async Task Run()
+    private async Task Run()
     {
-        Console.WriteLine("Hello World!");
+        var client = new HttpClient();
+        var response =
+            JsonSerializer.Deserialize<JsonObject>(
+                await client.GetStringAsync("https://api.hypixel.net/v2/resources/skyblock/items"));
+        foreach (var item in response["items"].AsArray())
+        {
+            _itemIds.Add(item["id"].ToString());
+        }
+
+
     }
 }
