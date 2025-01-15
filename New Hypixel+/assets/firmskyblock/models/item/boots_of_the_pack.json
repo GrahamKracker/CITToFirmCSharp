@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/armor/of_the_pack/boots_of_the_pack"
-  }
-}

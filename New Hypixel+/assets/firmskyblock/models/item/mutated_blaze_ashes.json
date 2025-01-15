@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:item/hplus_generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/items/crimson_isle/mob_loot/mutated_blaze_ashes"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:item/hplus_generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/items/runes/clouds_rune_2"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:item/hplus_generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/items/runes/rainy_day_rune_2"
-  }
-}

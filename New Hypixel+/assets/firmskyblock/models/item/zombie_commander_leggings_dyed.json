@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/armor/zombie_commander/zombie_commander_leggings_dyed"
-  }
-}

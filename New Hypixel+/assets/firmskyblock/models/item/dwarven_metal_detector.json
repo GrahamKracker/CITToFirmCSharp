@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:dwarven_metal_detector",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/tools/mining/dwarven_metal_detector"
-  }
-}

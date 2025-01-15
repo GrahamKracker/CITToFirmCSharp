@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:item/hplus_generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/accessories/new_year_cake_bag/new_year_cake_bag_empty"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:item/hplus_generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/items/misc/floating_crystals/resource_regenerator_crystal"
-  }
-}

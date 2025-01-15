@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/items/modifiers/the_art_of_war"
-  }
-}

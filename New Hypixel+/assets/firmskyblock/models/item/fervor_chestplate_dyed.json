@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/armor/fervor/fervor/fervor_chestplate_dyed"
-  }
-}

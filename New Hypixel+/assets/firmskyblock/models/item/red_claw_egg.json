@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:item/hplus_tint_bypass",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/items/slayer/sven_packmaster/red_claw_egg"
-  }
-}

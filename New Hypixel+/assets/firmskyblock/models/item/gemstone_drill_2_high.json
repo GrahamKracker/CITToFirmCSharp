@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:item/hplus_handheld",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/tools/drills/gemstone_drill_2_high"
-  }
-}

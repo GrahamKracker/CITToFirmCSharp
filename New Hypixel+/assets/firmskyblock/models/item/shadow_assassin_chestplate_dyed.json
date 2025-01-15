@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/armor/shadow_assassin/shadow_assassin_chestplate_dyed"
-  }
-}

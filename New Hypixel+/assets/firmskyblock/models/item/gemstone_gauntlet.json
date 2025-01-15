@@ -1,6 +1,0 @@
-{
-  "parent": "firmskyblock:gemstone_gauntlet",
-  "textures": {
-    "layer0": "firmskyblock:item/skyblock/tools/mining/gemstone_gauntlet/gemstone_gauntlet"
-  }
-}

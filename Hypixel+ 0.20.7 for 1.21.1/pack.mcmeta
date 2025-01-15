@@ -1,7 +1,7 @@
  {
   "pack": {
     "pack_format": 32,
-    "supported_formats": {"min_inclusive": 32, "max_inclusive": 44},
+    "supported_formats": {"min_inclusive": 32, "max_inclusive": 34},
     "description": "§7Hypixel+ for 1.21.1 §80.20.7 §cOF J1\n§8v1    §7Created by ic22487"
   }
 }

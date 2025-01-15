@@ -14,21 +14,24 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Vanilla Resource Pack\**" />
-      <Compile Remove="New Hypixel+\**" />
-      <Compile Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
+        <Compile Remove="Vanilla Resource Pack\**" />
+        <Compile Remove="New Hypixel+\**" />
+        <Compile Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
+        <Compile Remove="New Hypixel+ Original Backup\**"/>
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="Vanilla Resource Pack\**" />
-      <EmbeddedResource Remove="New Hypixel+\**" />
-      <EmbeddedResource Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
+        <EmbeddedResource Remove="Vanilla Resource Pack\**" />
+        <EmbeddedResource Remove="New Hypixel+\**" />
+        <EmbeddedResource Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
+        <EmbeddedResource Remove="New Hypixel+ Original Backup\**"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Vanilla Resource Pack\**" />
-      <None Remove="New Hypixel+\**" />
-      <None Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
+        <None Remove="Vanilla Resource Pack\**" />
+        <None Remove="New Hypixel+\**" />
+        <None Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
+        <None Remove="New Hypixel+ Original Backup\**"/>
     </ItemGroup>
 
     <ItemGroup>
