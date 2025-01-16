@@ -9,7 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MosaicoSolutions.CSharpProperties" Version="4.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
@@ -18,6 +17,7 @@
         <Compile Remove="New Hypixel+\**" />
         <Compile Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <Compile Remove="New Hypixel+ Original Backup\**"/>
+        <Compile Remove="Hypixel+ 0.20.7 for 1.21.1 UNTOUCHED\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -25,6 +25,7 @@
         <EmbeddedResource Remove="New Hypixel+\**" />
         <EmbeddedResource Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <EmbeddedResource Remove="New Hypixel+ Original Backup\**"/>
+        <EmbeddedResource Remove="Hypixel+ 0.20.7 for 1.21.1 UNTOUCHED\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -32,6 +33,7 @@
         <None Remove="New Hypixel+\**" />
         <None Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <None Remove="New Hypixel+ Original Backup\**"/>
+        <None Remove="Hypixel+ 0.20.7 for 1.21.1 UNTOUCHED\**"/>
     </ItemGroup>
 
     <ItemGroup>

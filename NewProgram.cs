@@ -1,8 +1,10 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using CITToFirmCSharp.Migrators;
-using MosaicoSolutions.CSharpProperties;
 
 namespace CITToFirmCSharp;
 
@@ -13,6 +15,12 @@ public class NewProgram
     private static readonly string NewPath = Path.Combine(BasePath, @"New Hypixel+\");
     private static readonly string VanillaPath = Path.Combine(BasePath, @"Vanilla Resource Pack\");
     private static readonly string BackupPath = Path.Combine(BasePath, @"New Hypixel+ Original Backup\");
+    private static readonly string ItemIdsPath = Path.Combine(BasePath, "itemIds.json");
+
+    public static readonly string ModelOutputPath = Path.Combine(NewPath, "assets", "firmskyblock", "models", "item");
+    public static readonly string TextureOutputPath = Path.Combine(NewPath, "assets", "hypixelplus", "textures", "item");
+    public static readonly string TextureArmorOutputPath = Path.Combine(NewPath, "assets", "hypixelplus", "textures", "entity", "equipment");
+    public static readonly string ArmorOutputPath = Path.Combine(NewPath, "assets", "firmskyblock", "overrides", "armor_models");
 
     private readonly HashSet<string> _itemIds = [
         "ARCHER_DUNGEON_ABILITY_2",
@@ -34,7 +42,7 @@ public class NewProgram
         "PERFECT_HOPPER",
     ];
 
-    private List<Migrator> _migrators = Assembly.GetExecutingAssembly().GetTypes()
+    private readonly List<Migrator> _migrators = Assembly.GetExecutingAssembly().GetTypes()
         .Where(t => t.IsSubclassOf(typeof(Migrator)))
         .Select(t => (Migrator) Activator.CreateInstance(t))
         .ToList();
@@ -51,8 +59,12 @@ public class NewProgram
         {
             Directory.Delete(BackupPath, true);
         }
-
         Directory.CreateDirectory(BackupPath);
+
+        Directory.CreateDirectory(ModelOutputPath);
+        Directory.CreateDirectory(TextureOutputPath);
+        Directory.CreateDirectory(TextureArmorOutputPath);
+        Directory.CreateDirectory(ArmorOutputPath);
 
         foreach (var file in Directory.GetFiles(OriginalPath, "*", SearchOption.AllDirectories))
         {
@@ -65,16 +77,46 @@ public class NewProgram
         await new NewProgram().Run();
     }
 
-    private async Task Run()
+    private async Task SetItemIds()
     {
         var client = new HttpClient();
-        var response =
-            JsonSerializer.Deserialize<JsonObject>(
-                await client.GetStringAsync("https://api.hypixel.net/v2/resources/skyblock/items"));
-        foreach (var item in response["items"].AsArray())
+        var itemListStopwatch = Stopwatch.StartNew();
+
+        if (File.Exists(ItemIdsPath))
         {
-            _itemIds.Add(item["id"].ToString());
+            var file = File.Open(ItemIdsPath, FileMode.Open, FileAccess.Read);
+            using var reader = new StreamReader(file);
+            while (!reader.EndOfStream)
+            {
+                _itemIds.Add(await reader.ReadLineAsync() ?? string.Empty);
+            }
+
+            file.Close();
         }
+        else
+        {
+            var file = File.Open(ItemIdsPath, FileMode.Create, FileAccess.Write);
+            var response =
+                JsonSerializer.Deserialize<JsonObject>(
+                    await client.GetStringAsync("https://api.hypixel.net/v2/resources/skyblock/items"));
+            var stream = new StreamWriter(file);
+            foreach (var item in response["items"].AsArray())
+            {
+                var itemId = item["id"].ToString();
+                _itemIds.Add(itemId);
+                await stream.WriteLineAsync(itemId);
+            }
+
+            file.Close();
+        }
+
+        itemListStopwatch.Stop();
+        await Console.Out.WriteLineAsync("Item list loaded in " + itemListStopwatch.ElapsedMilliseconds + "ms");
+    }
+
+    private async Task Run()
+    {
+        await SetItemIds();
 
         var citPath = Path.Combine(BackupPath, "assets", "minecraft", "optifine", "cit");
         Directory.Delete(Path.Combine(citPath, "bedwars"), true);
@@ -84,22 +126,80 @@ public class NewProgram
 
         var modelsPath = Path.Combine(OriginalPath, "assets", "minecraft", "models", "item");
 
+        var modelsStopWatch = Stopwatch.StartNew();
         foreach (var file in Directory.GetFiles(modelsPath, "*", SearchOption.AllDirectories))
         {
             Directory.CreateDirectory(Path.GetDirectoryName(file)!);
-            File.Copy(file, Path.Combine(NewPath, "assets", "minecraft", "models", "item"), false);
+            var newPath = Path.Combine(NewPath, "assets", "minecraft", "models", "item", Path.GetFileName(file));
+            Directory.CreateDirectory(Path.GetDirectoryName(newPath)!);
+            File.Copy(file, newPath, true);
         }
-        
-        foreach (var migrator in _migrators)
+
+        modelsStopWatch.Stop();
+        await Console.Out.WriteLineAsync("Models moved in " + modelsStopWatch.ElapsedMilliseconds + "ms");
+
+        var propertiesStopWatch = Stopwatch.StartNew();
+        var tasks = new List<Task>();
+        Parallel.ForEach(Directory.GetFiles(citPath, "*.properties", SearchOption.AllDirectories), file =>
         {
-            foreach (var file in Directory.GetFiles(citPath, "*.properties", SearchOption.AllDirectories))
+            tasks.Add(PropertiesParser.ParsePropertiesAsync(file).ContinueWith(task =>
             {
-                var properties = (Properties) await Properties.LoadAsync(file);
-                if (migrator.CanMigrate(properties, file))
+                var properties = task.Result;
+                var customId = properties.GetValueOrDefault("components.custom_data.id", string.Empty);
+
+                var ids = GetPossibleItems(customId);
+                if (ids.Length == 0)
                 {
-                    migrator.Migrate(properties, file);
+                    /*await Console.Error.WriteLineAsync("Invalid id: " + customId);
+                    await Console.Error.WriteLineAsync("path: " + file);*/
+                    Migrate(string.Empty, properties, file);
+                    return;
+                }
+
+                foreach (var id in ids)
+                {
+                    Migrate(id, properties, file);
+                }
+            }));
+        });
+        await Task.WhenAll(tasks);
+        propertiesStopWatch.Stop();
+
+        await Console.Out.WriteLineAsync("Properties migrated in " + propertiesStopWatch.ElapsedMilliseconds + "ms");
+        return;
+
+        void Migrate(string id, Dictionary<string, string> properties, string file)
+        {
+
+            // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
+            foreach (var migrator in _migrators)
+            {
+                //log all properties
+                if (properties.ContainsValue("null_acacia_log"))
+                {
+                    Console.WriteLine("null_acacia_log");
+                }
+
+                if (migrator.Migrate(id.ToLowerInvariant(), properties, file))
+                {
+                    break;
                 }
             }
         }
+    }
+
+
+    private string[] GetPossibleItems(string input)
+    {
+        if (input.StartsWith("regex:"))
+        {
+            var regex = new Regex(input[6..]);
+            return _itemIds.Where(id => regex.IsMatch(id)).ToArray();
+        }
+        if (_itemIds.Contains(input)) {
+            return [input];
+        }
+
+        return [];
     }
 }
