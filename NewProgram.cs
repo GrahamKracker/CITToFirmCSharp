@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO.Compression;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -10,12 +11,12 @@ namespace CITToFirmCSharp;
 
 public class NewProgram
 {
-    private const string BasePath = @"C:\Users\gjguz\source\repos\Minecraft\CITToFirmCSharp\";
-    private static readonly string OriginalPath = Path.Combine(BasePath, @"Hypixel+ 0.20.7 for 1.21.1\");
-    private static readonly string NewPath = Path.Combine(BasePath, @"New Hypixel+\");
-    private static readonly string VanillaPath = Path.Combine(BasePath, @"Vanilla Resource Pack\");
-    private static readonly string BackupPath = Path.Combine(BasePath, @"New Hypixel+ Original Backup\");
-    private static readonly string ItemIdsPath = Path.Combine(BasePath, "itemIds.json");
+    public const string BasePath = @"C:\Users\gjguz\source\repos\Minecraft\CITToFirmCSharp\";
+    public static readonly string OriginalPath = Path.Combine(BasePath, @"Hypixel+ 0.20.7 for 1.21.1\");
+    public static readonly string NewPath = Path.Combine(BasePath, @"New Hypixel+\");
+    public static readonly string VanillaPath = Path.Combine(BasePath, @"Vanilla Resource Pack\");
+    public static readonly string TempPath = Path.Combine(BasePath, @"New Hypixel+ Temp Dir\");
+    public static readonly string ItemIdsPath = Path.Combine(BasePath, "itemIds.json");
 
     public static readonly string ModelOutputPath = Path.Combine(NewPath, "assets", "firmskyblock", "models", "item");
     public static readonly string TextureOutputPath = Path.Combine(NewPath, "assets", "hypixelplus", "textures", "item");
@@ -44,7 +45,7 @@ public class NewProgram
 
     private readonly List<Migrator> _migrators = Assembly.GetExecutingAssembly().GetTypes()
         .Where(t => t.IsSubclassOf(typeof(Migrator)))
-        .Select(t => (Migrator) Activator.CreateInstance(t))
+        .Select(t => (Migrator) Activator.CreateInstance(t)!)
         .ToList();
 
     private static async Task Main(string[] args)
@@ -55,11 +56,11 @@ public class NewProgram
         }
         Directory.CreateDirectory(NewPath);
 
-        if (Directory.Exists(BackupPath))
+        if (Directory.Exists(TempPath))
         {
-            Directory.Delete(BackupPath, true);
+            Directory.Delete(TempPath, true);
         }
-        Directory.CreateDirectory(BackupPath);
+        Directory.CreateDirectory(TempPath);
 
         Directory.CreateDirectory(ModelOutputPath);
         Directory.CreateDirectory(TextureOutputPath);
@@ -69,12 +70,49 @@ public class NewProgram
         foreach (var file in Directory.GetFiles(OriginalPath, "*", SearchOption.AllDirectories))
         {
             var relativePath = file[OriginalPath.Length..];
-            var newPath = Path.Combine(BackupPath, relativePath);
+            var newPath = Path.Combine(TempPath, relativePath);
             Directory.CreateDirectory(Path.GetDirectoryName(newPath)!);
             File.Copy(file, newPath, true);
         }
 
         await new NewProgram().Run();
+
+        Parallel.ForEach(Directory.GetFiles(Path.Combine(TempPath), "*", SearchOption.TopDirectoryOnly), file =>
+        {
+            File.Copy(file, Path.Combine(NewPath, Path.GetFileName(file)), true);
+        });
+
+        string zipPath;
+        int i = 0;
+        while (true)
+        {
+            zipPath = Path.Combine(
+                @"C:\Users\gjguz\AppData\Roaming\PrismLauncher\instances\1.21 Hypixel\.minecraft\resourcepacks\",
+                new DirectoryInfo(NewPath).Name + $"_{i}.zip");
+            try
+            {
+                if (File.Exists(zipPath))
+                {
+                    File.Delete(zipPath);
+                }
+
+                break;
+            }
+            catch (Exception)
+            {
+                i++;
+                if (i == 10) throw;
+            }
+        }
+
+        var zipStopWatch = Stopwatch.StartNew();
+        Console.WriteLine("beginning zipping " + Path.GetFileName(zipPath));
+
+        ZipFile.CreateFromDirectory(NewPath, zipPath, CompressionLevel.NoCompression, false);
+        zipStopWatch.Stop();
+
+        Console.WriteLine(
+            $"Done zipping to {Path.GetFileName(zipPath)}, took {zipStopWatch.ElapsedMilliseconds}ms \nCurrent Time: {DateTime.Now:hh:mm:ss tt}");
     }
 
     private async Task SetItemIds()
@@ -118,7 +156,7 @@ public class NewProgram
     {
         await SetItemIds();
 
-        var citPath = Path.Combine(BackupPath, "assets", "minecraft", "optifine", "cit");
+        var citPath = Path.Combine(TempPath, "assets", "minecraft", "optifine", "cit");
         Directory.Delete(Path.Combine(citPath, "bedwars"), true);
         Directory.Delete(Path.Combine(citPath, "housing"), true);
         Directory.Delete(Path.Combine(citPath, "murder"), true);
@@ -140,27 +178,38 @@ public class NewProgram
 
         var propertiesStopWatch = Stopwatch.StartNew();
         var tasks = new List<Task>();
+
         Parallel.ForEach(Directory.GetFiles(citPath, "*.properties", SearchOption.AllDirectories), file =>
         {
-            tasks.Add(PropertiesParser.ParsePropertiesAsync(file).ContinueWith(task =>
+            var task = PropertiesParser.ParsePropertiesAsync(file).ContinueWith(task =>
             {
-                var properties = task.Result;
-                var customId = properties.GetValueOrDefault("components.custom_data.id", string.Empty);
-
-                var ids = GetPossibleItems(customId);
-                if (ids.Length == 0)
+                try
                 {
-                    /*await Console.Error.WriteLineAsync("Invalid id: " + customId);
-                    await Console.Error.WriteLineAsync("path: " + file);*/
-                    Migrate(string.Empty, properties, file);
-                    return;
-                }
+                    var properties = task.Result;
+                    var customId = properties.GetValueOrDefault("components.custom_data.id", string.Empty);
 
-                foreach (var id in ids)
-                {
-                    Migrate(id, properties, file);
+                    var ids = GetPossibleItems(customId);
+                    if (ids.Length == 0)
+                    {
+                        //Console.Error.WriteLine("Invalid id: " + customId);
+                        //Console.Error.WriteLine("path: " + file);
+                        return;
+                        Migrate(string.Empty, properties, file);
+                        return;
+                    }
+
+                    foreach (var id in ids)
+                    {
+                        Migrate(id, properties, file);
+                    }
                 }
-            }));
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            });
+            if(task != null)
+                tasks.Add(task);
         });
         await Task.WhenAll(tasks);
         propertiesStopWatch.Stop();
@@ -170,18 +219,13 @@ public class NewProgram
 
         void Migrate(string id, Dictionary<string, string> properties, string file)
         {
-
             // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
+            // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
             foreach (var migrator in _migrators)
             {
-                //log all properties
-                if (properties.ContainsValue("null_acacia_log"))
-                {
-                    Console.WriteLine("null_acacia_log");
-                }
-
                 if (migrator.Migrate(id.ToLowerInvariant(), properties, file))
                 {
+                    File.Delete(file);
                     break;
                 }
             }

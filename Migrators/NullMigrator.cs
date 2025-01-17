@@ -20,6 +20,6 @@ public partial class NullMigrator : Migrator
         return false;
     }
 
-    [GeneratedRegex(".*null")]
+    [GeneratedRegex(".*?null")]
     private partial Regex NullRegex();
 }
