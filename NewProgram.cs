@@ -79,7 +79,7 @@ public class NewProgram
 
         Parallel.ForEach(Directory.GetFiles(Path.Combine(TempPath), "*", SearchOption.TopDirectoryOnly), file =>
         {
-            File.Copy(file, Path.Combine(NewPath, Path.GetFileName(file)), true);
+            File.Move(file, Path.Combine(NewPath, Path.GetFileName(file)), true);
         });
 
         string zipPath;
@@ -87,7 +87,7 @@ public class NewProgram
         while (true)
         {
             zipPath = Path.Combine(
-                @"C:\Users\gjguz\AppData\Roaming\PrismLauncher\instances\1.21 Hypixel\.minecraft\resourcepacks\",
+                @"C:\Users\gjguz\AppData\Roaming\PrismLauncher\instances\1.21.3 Hypixel\.minecraft\resourcepacks\",
                 new DirectoryInfo(NewPath).Name + $"_{i}.zip");
             try
             {
@@ -107,7 +107,6 @@ public class NewProgram
 
         var zipStopWatch = Stopwatch.StartNew();
         Console.WriteLine("beginning zipping " + Path.GetFileName(zipPath));
-
         ZipFile.CreateFromDirectory(NewPath, zipPath, CompressionLevel.NoCompression, false);
         zipStopWatch.Stop();
 
@@ -175,6 +174,9 @@ public class NewProgram
 
         modelsStopWatch.Stop();
         await Console.Out.WriteLineAsync("Models moved in " + modelsStopWatch.ElapsedMilliseconds + "ms");
+
+        File.Move(Path.Combine(TempPath, "assets", "minecraft", "optifine", "cit", "ui", "achoo.png"), Path.Combine(
+            TextureOutputPath, "achoo.png"));
 
         var propertiesStopWatch = Stopwatch.StartNew();
         var tasks = new List<Task>();

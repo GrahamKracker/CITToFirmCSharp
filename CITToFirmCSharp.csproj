@@ -6,6 +6,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <Optimize>false</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <Optimize>true</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +25,6 @@
         <Compile Remove="New Hypixel+\**" />
         <Compile Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <Compile Remove="New Hypixel+ Temp Dir\**"/>
-        <Compile Remove="Hypixel+ 0.20.7 for 1.21.1 UNTOUCHED\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -25,7 +32,6 @@
         <EmbeddedResource Remove="New Hypixel+\**" />
         <EmbeddedResource Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <EmbeddedResource Remove="New Hypixel+ Temp Dir\**"/>
-        <EmbeddedResource Remove="Hypixel+ 0.20.7 for 1.21.1 UNTOUCHED\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -33,7 +39,6 @@
         <None Remove="New Hypixel+\**" />
         <None Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <None Remove="New Hypixel+ Temp Dir\**"/>
-        <None Remove="Hypixel+ 0.20.7 for 1.21.1 UNTOUCHED\**"/>
     </ItemGroup>
 
     <ItemGroup>

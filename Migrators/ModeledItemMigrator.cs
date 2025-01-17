@@ -74,21 +74,28 @@ public partial class ModeledItemMigrator : Migrator
 
                     text = text.Replace(relativeTexture, $"hypixelplus:item/{fileName}");
                 }
-                text = text.Replace("\"layer0\": \"optifine/cit/ui/achoo.png\",", "");
-                modelFile.Delete();
+                text = text.Replace("""
+                                    "layer0": "optifine/cit/ui/achoo.png",
+                                    """, """
+                                         "layer0": "hypixelplus:item/achoo",
+                                         """);
                 File.WriteAllText(Path.Combine(ModelOutputPath, $"{id.ToLowerInvariant()}.json"), text);
             }
             else
             {
+
                 var customModel = new JObject
                 {
-                    ["parent"] = "item/generated",
+                    ["parent"] = "minecraft:item/generated",
                     ["textures"] = new JObject
                     {
-                        ["layer0"] = $"hypixelplus:item/{""}"
+                        ["layer0"] = model
                     }
                 };
-                Console.WriteLine("Model file not found: " + modelFile.FullName);
+                Console.WriteLine($"Model file not found for {id}: {modelFile.FullName}");
+
+                File.WriteAllText(modelFile.FullName, customModel.ToString());
+                
                 return false;
             }
 
