@@ -1,7 +1,0 @@
-{
-    "parent": "item/hplus_generated",
-    "textures": {
-        "layer0": "item/hopper",
-        "layer1": "./enchanted_hopper_coins"
-    }
-}

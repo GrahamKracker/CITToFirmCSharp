@@ -1,7 +1,0 @@
-{
-    "parent": "item/hplus_generated",
-    "textures": {
-        "layer0": "item/water_bucket",
-        "layer1": "./magical_bucket"
-    }
-}

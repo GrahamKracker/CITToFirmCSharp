@@ -1,7 +1,0 @@
-{
-	"parent": "item/hplus_giant_handheld_rod",
-	"textures": {
-		"hand": "./giant_fishing_rod_cast_hand",
-		"icon": "item/fishing_rod_cast"
-	}
-}

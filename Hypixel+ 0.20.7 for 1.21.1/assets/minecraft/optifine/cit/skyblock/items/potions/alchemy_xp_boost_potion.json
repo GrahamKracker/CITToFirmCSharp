@@ -1,8 +1,0 @@
-{
-    "parent": "item/hplus_generated",
-    "textures": {
-        "layer0": "item/potion_overlay",
-        "layer1": "item/potion",
-        "layer2": "./alchemy_xp_boost_potion"
-    }
-}

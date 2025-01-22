@@ -1,7 +1,0 @@
-{
-    "parent": "item/hplus_generated",
-    "textures": {
-        "layer0": "item/egg",
-        "layer1": "./bridge_egg"
-    }
-}
