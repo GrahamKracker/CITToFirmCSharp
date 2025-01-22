@@ -39,4 +39,8 @@
         <None Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <None Remove="New Hypixel+ Temp Dir\**"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Content Include=".github\workflows\build.yml" />
+    </ItemGroup>
 </Project>

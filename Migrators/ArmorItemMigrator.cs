@@ -39,6 +39,10 @@ public class ArmorItemMigrator : Migrator
         if (!File.Exists(textureOutputPath) && File.Exists(texturePath))
         {
             File.Move(texturePath, textureOutputPath);
+
+            var animatedFile = Path.Combine(Path.GetDirectoryName(originalPath)!, Path.GetFileName(originalPath) + ".mcmeta");
+            if (File.Exists(animatedFile))
+                File.Move(animatedFile, Path.Combine(TextureOutputPath, Path.GetFileName(animatedFile)));
         }
 
         return true;

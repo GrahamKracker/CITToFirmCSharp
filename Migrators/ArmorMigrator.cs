@@ -81,6 +81,11 @@ public class ArmorMigrator : Migrator
             }
         }
 
+        var animatedFile = Path.Combine(Path.GetDirectoryName(originalPath)!,
+                Path.GetFileNameWithoutExtension(texture) + ".png.mcmeta");
+        if (File.Exists(animatedFile))
+            File.Copy(animatedFile, Path.Combine(ArmorTextureOutputPath, Path.GetFileName(animatedFile)));
+
         return true;
     }
 
