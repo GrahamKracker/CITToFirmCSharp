@@ -1,16 +1,10 @@
 ﻿using System.Diagnostics;
 using System.IO.Compression;
-using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Text.RegularExpressions;
-using CITToFirmCSharp.Migrators;
 
 namespace CITToFirmCSharp;
 
 public class Program
 {
-
     public static  string NewPath => Path.Combine(ZipDirectory, @"Hypixel+ Firmament\");
     public static string TempPath => Path.Combine(ZipDirectory, @"Hypixel+ Firmament Temp Dir\");
     public static string ItemIdsPath => Path.Combine(AppContext.BaseDirectory, "itemIds.json");
@@ -26,7 +20,7 @@ public class Program
 
     private static async Task Main(string[] args)
     {
-        Console.WriteLine("Starting CITToFirmCSharp... (Created by GrahamKracker, based on ThatGravyBoat's kotlin script)");
+        Console.WriteLine($"Starting CITToFirmCSharp v{typeof(Program).Assembly.GetName().Version?.ToString(3) ?? "UNKNOWN"}, Created by GrahamKracker, based on ThatGravyBoat's kotlin script...");
         Console.WriteLine("This program is provided as is, with no warranty or guarantee of functionality. Use at your own risk.");
         Console.WriteLine("This program is not affiliated with Hypixel or Mojang in any way.");
 
