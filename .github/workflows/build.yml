@@ -32,11 +32,10 @@ jobs:
       - name: Build
         run: dotnet publish -r win-x64 --self-contained "${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj"
 
-      - name: Upload Mod DLL
+      - name: Upload Exe
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.PROJECT_NAME }}.dll
-
+          name: ${{ env.PROJECT_NAME }}.exe
 
       - name: Release
         uses: softprops/action-gh-release@v1
