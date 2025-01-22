@@ -10,7 +10,7 @@ on:
 
 
 env:
-  PROJECT_NAME: CITToFirmCSHarp
+  PROJECT_NAME: CITToFirmCSharp
 
 jobs:
   build:
