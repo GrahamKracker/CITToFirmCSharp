@@ -1,5 +1,5 @@
 ﻿
-using Newtonsoft.Json.Linq;
+using System.Text.Json.Nodes;
 
 namespace CITToFirmCSharp.Migrators;
 
@@ -14,35 +14,27 @@ public class UnModeledItemMigrator : Migrator
             return false;
         }
 
-        var jsonObject = new JObject
+        var jsonObject = new JsonObject
         {
             ["parent"] = "minecraft:item/generated",
-            ["textures"] = new JObject
+            ["textures"] = new JsonObject
             {
                 ["layer0"] = $"hypixelplus:item/{Path.GetFileNameWithoutExtension(originalPath)}"
             }
         };
 
-        var generatedPath = Path.Combine(NewProgram.ModelOutputPath, $"{id.ToLowerInvariant()}.json");
+        var generatedPath = Path.Combine(Program.ModelOutputPath, $"{id.ToLowerInvariant()}.json");
         if (!File.Exists(generatedPath))
         {
-            //todo: maybe save all the jsons and write them at the end to avoid file race conditions that i am ignoring here :)
-            try
-            {
                 using var file = File.Open(generatedPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 file.SetLength(0);
                 using var writer = new StreamWriter(file);
                 writer.Write(jsonObject.ToString());
-            }
-            catch (Exception e)
-            {
-                return true;
-            }
         }
 
         var texturePath = Path.ChangeExtension(originalPath, ".png");
-        var textureOutputPath = Path.Combine(NewProgram.TextureOutputPath, Path.GetFileName(texturePath));
-        if(!File.Exists(textureOutputPath))
+        var textureOutputPath = Path.Combine(Program.TextureOutputPath, Path.GetFileName(texturePath));
+        if(!File.Exists(textureOutputPath) && File.Exists(texturePath))
         {
             File.Move(texturePath, textureOutputPath);
         }

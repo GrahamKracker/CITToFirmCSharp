@@ -1,1 +1,1 @@
-﻿global using static CITToFirmCSharp.NewProgram;
+﻿global using static CITToFirmCSharp.Program;

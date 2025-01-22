@@ -7,6 +7,9 @@
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
         <DebugType>embedded</DebugType>
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -15,10 +18,6 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <Optimize>true</Optimize>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    </ItemGroup>
 
     <ItemGroup>
         <Compile Remove="Vanilla Resource Pack\**" />
@@ -40,10 +39,4 @@
         <None Remove="Hypixel+ 0.20.7 for 1.21.1\**" />
         <None Remove="New Hypixel+ Temp Dir\**"/>
     </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Program.cs" />
-      <Content Include="Program.cs" />
-    </ItemGroup>
-
 </Project>

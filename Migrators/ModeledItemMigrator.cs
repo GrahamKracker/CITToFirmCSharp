@@ -1,37 +1,50 @@
 ﻿using System.Text.Json.Nodes;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json.Linq;
 
 namespace CITToFirmCSharp.Migrators;
 
-public partial class ModeledItemMigrator : Migrator
+public class ModeledItemMigrator : Migrator
 {
-    private Tuple<string, string?> getModelTexture(Dictionary<string, string> properties)
+    private static Tuple<string?, string?> GetModelTexture(Dictionary<string, string> properties)
     {
         var model = properties.GetValueOrDefault("model");
-        if (model == null) return Tuple.Create((string)null!, (string)null!)!;
+        if (model == null)
+            return Tuple.Create<string?, string?>(null!, null!);
         var texture = properties.GetValueOrDefault("texture");
 
-        return Tuple.Create(model, texture);
+        return Tuple.Create(model, texture)!;
     }
 
     /// <inheritdoc />
     public override bool Migrate(string id, Dictionary<string, string> properties, string originalPath)
     {
-        (string model, string texture) = getModelTexture(properties);
+        (string? model, string? texture) = GetModelTexture(properties);
         if (model == null) return false;
 
-        if (properties.Count is 1 or > 4) return false; //todo: dont hardcode the amount of properties
         if (texture != null)
         {
-            var jObject = new JObject
+            JsonObject jObject;
+
+            if (texture.StartsWith("textures/"))
+            {
+                texture = texture[9..];
+                jObject = new JsonObject
+                {
+                    ["parent"] = model,
+                    ["textures"] = new JsonObject
+                    {
+                        ["layer0"] = $"minecraft:{texture}"
+                    }
+                };
+            }
+            else jObject = new JsonObject
             {
                 ["parent"] = model,
-                ["textures"] = new JObject
+                ["textures"] = new JsonObject
                 {
                     ["layer0"] = $"hypixelplus:item/{texture}"
                 }
             };
+
             var modelFile =
                 Path.Combine(ModelOutputPath, $"{id.ToLowerInvariant()}.json");
             File.WriteAllText(modelFile, jObject.ToString());
@@ -45,12 +58,11 @@ public partial class ModeledItemMigrator : Migrator
         }
         else
         {
-            //Console.WriteLine("Modeled item migration: " + id + ": " + Path.GetRelativePath(TempPath, originalPath));
-
-            var modelFile = new FileInfo(Path.Combine(Path.GetDirectoryName(originalPath)!, $"{model}.json"));
+            var modelFile = new FileInfo(Path.Combine(Path.GetDirectoryName(originalPath)!, Path.ChangeExtension(model, ".json")));
             if (modelFile.Exists)
             {
                 var text = File.ReadAllText(modelFile.FullName);
+                modelFile.Delete();
 
                 var textures = JsonNode.Parse(text)?["textures"]?.AsObject();
                 if (textures == null)
@@ -59,21 +71,24 @@ public partial class ModeledItemMigrator : Migrator
                     return true;
                 }
 
-                foreach (var relativeTexture in JsonNode.Parse(text)["textures"].AsObject().Select(x => x.Value.ToString()!).ToList())
+                foreach (var relativeTexture in textures.Select(x => x.Value?.ToString()!).ToList())
                 {
-                    var fileName = relativeTexture.Substring(relativeTexture.LastIndexOf("/") + 1);
-                    if(!relativeTexture.StartsWith("./"))
+                    var fileName = relativeTexture.Substring(relativeTexture.LastIndexOf('/') + 1);
+                    if (!relativeTexture.StartsWith("./"))
                         continue;
 
                     var texturePath = relativeTexture[2..];
                     var textureOutputPath = Path.Combine(TextureOutputPath, $"{fileName}.png");
-                    if (File.Exists(Path.Combine(Path.GetDirectoryName(modelFile.FullName)!, $"{texturePath}.png")))
+                    if (File.Exists(Path.Combine(Path.GetDirectoryName(modelFile.FullName)!, $"{texturePath}.png")) &&
+                        !File.Exists(textureOutputPath))
                     {
-                        File.Move(Path.Combine(Path.GetDirectoryName(modelFile.FullName)!, $"{texturePath}.png"), textureOutputPath);
+                        File.Move(Path.Combine(Path.GetDirectoryName(modelFile.FullName)!, $"{texturePath}.png"),
+                            textureOutputPath);
                     }
 
                     text = text.Replace(relativeTexture, $"hypixelplus:item/{fileName}");
                 }
+
                 text = text.Replace("""
                                     "layer0": "optifine/cit/ui/achoo.png",
                                     """, """
@@ -83,22 +98,43 @@ public partial class ModeledItemMigrator : Migrator
             }
             else
             {
+                JsonObject? customModel;
 
-                var customModel = new JObject
+                if (model.StartsWith("textures/"))
                 {
-                    ["parent"] = "minecraft:item/generated",
-                    ["textures"] = new JObject
+                    model = model[9..];
+                    customModel = new JsonObject
                     {
-                        ["layer0"] = model
+                        ["parent"] = $"minecraft:{model}"
+                    };
+                }
+                else if (model.StartsWith("item/"))
+                {
+                    model = model[5..];
+                    customModel = new JsonObject
+                    {
+                        ["parent"] = $"minecraft:item/{model}"
+                    };
+                }
+                else
+                {
+                    if (File.Exists(Path.Combine(ModelOutputPath, $"{model.ToLowerInvariant()}.json")))
+                    {
+                        customModel = JsonNode.Parse(File.ReadAllText(Path.Combine(ModelOutputPath, $"{model.ToLowerInvariant()}.json")))?.AsObject();
                     }
-                };
-                Console.WriteLine($"Model file not found for {id}: {modelFile.FullName}");
+                    else
+                    {
+                        customModel = new JsonObject
+                        {
+                            ["parent"] = $"hypixelplus:item/{model}"
+                        };
+                    }
+                }
 
-                File.WriteAllText(modelFile.FullName, customModel.ToString());
-                
+                File.WriteAllText(Path.Combine(ModelOutputPath, $"{id.ToLowerInvariant()}.json"), customModel?.ToString());
+
                 return false;
             }
-
         }
 
         return true;
